@@ -5,8 +5,12 @@ from pprint import pprint
 
 session=boto3.Session(profile_name='default',region_name='us-east-1')
 ec2 = boto3.resource('ec2')
+PathToCSVFile="create_tag.csv"
 
-with open("C:/Users/rakuluru/Desktop/create_tag.csv", newline='') as csv_file:
+#csv file format should be like every row has to be following format. Header row contents as below.
+#instance_id,Key1,Value1,Key2,Value2
+
+with open(PathToCSVFile, newline='') as csv_file:
     reader = csv.DictReader(csv_file)
     for row in reader:
         for var in ec2.instances.all():
